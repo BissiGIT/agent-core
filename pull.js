@@ -7,3 +7,5 @@ function UpdateCore() {
         console.log('SUCCESS!')
     })
 }
+
+module.exports = {UpdateCore};
