@@ -1,3 +1,5 @@
+const { exec } = require("child_process");
+
 // FUNCTION PULL
 
 function UpdateCore() {

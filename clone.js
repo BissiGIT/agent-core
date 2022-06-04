@@ -1,5 +1,6 @@
-// FUNCTION PULL
+const { exec } = require("child_process");
 
+// FUNCTION PULL
 function CloneCore() {
     exec('cd agent-core && git pull', (error, stdout, stderr) => {
         if (error) {
