@@ -35,7 +35,7 @@ function CloneWebsite() {
 }
 
 function Test() {
-    exec('ls', (error, stdout, stderr) => {
+    exec('dir', (error, stdout, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
             return;
