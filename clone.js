@@ -2,7 +2,7 @@ const { exec } = require("child_process");
 
 // FUNCTION PULL
 function CloneCore() {
-    exec('cd agent-core && git clone', (error, stdout, stderr) => {
+    exec('git clone https://github.com/BissiGIT/agent-core.git', (error, stdout, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
             return;
@@ -13,7 +13,7 @@ function CloneCore() {
 }
 
 function CloneFork() {
-    exec('cd modules/agent-fork && git clone https://github.com/BissiGIT/agent-fork.git', (error, stdout, stderr) => {
+    exec('cd modules && git clone https://github.com/BissiGIT/agent-fork.git', (error, stdout, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
             return;
@@ -24,7 +24,7 @@ function CloneFork() {
 }
 
 function CloneWebsite() {
-    exec('cd modules/agent-website && git clone https://github.com/BissiGIT/agent-website.git', (error, stdout, stderr) => {
+    exec('cd modules && git clone https://github.com/BissiGIT/agent-website.git', (error, stdout, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
             return;
