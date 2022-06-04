@@ -1,11 +1,36 @@
 // FUNCTION PULL
 
 function UpdateCore() {
-    const gitPullOrClone = require('git-pull-or-clone')
-    gitPullOrClone('git@github.com:feross/standard.git', '/core', (err) => {
-        if (err) throw err
-        console.log('SUCCESS!')
-    })
+    exec('cd agent-core && git pull', (error, stdout, stderr) => {
+        if (error) {
+            console.error(`exec error: ${error}`);
+            return;
+        }
+        console.log(`stdout: ${stdout}`);
+        console.error(`stderr: ${stderr}`);
+    });
 }
 
-module.exports = {UpdateCore};
+function UpdateFork() {
+    exec('cd modules/agent-fork && git pull', (error, stdout, stderr) => {
+        if (error) {
+            console.error(`exec error: ${error}`);
+            return;
+        }
+        console.log(`stdout: ${stdout}`);
+        console.error(`stderr: ${stderr}`);
+    });
+}
+
+function UpdateWebsite() {
+    exec('cd modules/agent-website && git pull', (error, stdout, stderr) => {
+        if (error) {
+            console.error(`exec error: ${error}`);
+            return;
+        }
+        console.log(`stdout: ${stdout}`);
+        console.error(`stderr: ${stderr}`);
+    });
+}
+
+module.exports = { UpdateCore, UpdateFork, UpdateWebsite }
