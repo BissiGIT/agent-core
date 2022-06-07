@@ -34,15 +34,4 @@ function CloneWebsite() {
     });
 }
 
-function Test() {
-    exec('dir', (error, stdout, stderr) => {
-        if (error) {
-            console.error(`exec error: ${error}`);
-            return;
-        }
-        console.log(`stdout: ${stdout}`);
-        console.error(`stderr: ${stderr}`);
-    });
-}
-
-module.exports = { CloneCore, CloneFork, CloneWebsite, Test }
+module.exports = { CloneCore, CloneFork, CloneWebsite }
