@@ -1,6 +1,6 @@
-const path = './functions/config/config.json';
-const { fork } = require("child_process");
+const axios = require('axios').default;
 const fs = require("fs");
+var PathUpdate = "./test/agent-website/update/";
 
 function UpdateList() {
     axios.get('http://192.168.1.202:6102/notification')
@@ -9,12 +9,69 @@ function UpdateList() {
             let UDCount = Object.keys(updateData).length
             for (let i = 0; i < UDCount; i++) {
                 let Module = Object.keys(updateData)[i];
-                console.log(Module);
                 if (Module !== "agent-core") {
-                    let rawdata = fs.readFileSync('./modules/' + Module + ".json");
+                    let rawdata = fs.readFileSync('./modules/' + Module + "/config.json");
                     let UpData = JSON.parse(rawdata);
-                    if (UpData.build == updateData[Module].build) {
-                        console.log(updateData[Module].build);
+                    if (UpData.build !== updateData[Module].build) {
+                        var dataFork = {
+                                update: true,
+                                version: updateData[Module].version,
+                                build: updateData[Module].build
+                            }
+                            // Conversion
+                        const forkinfoJSON = JSON.stringify(dataFork);
+                        const forkinfoObject = JSON.parse(forkinfoJSON);
+                        // Converting js object into JSON string
+                        // and writting to data.json file
+                        const dataJSON = JSON.stringify(forkinfoObject);
+                        // Ecriture du fichier
+                        fs.writeFileSync(PathUpdate + Module + ".json", dataJSON);
+                    } else {
+                        var dataFork = {
+                                update: false,
+                                version: updateData[Module].version,
+                                build: updateData[Module].build
+                            }
+                            // Conversion
+                        const forkinfoJSON = JSON.stringify(dataFork);
+                        const forkinfoObject = JSON.parse(forkinfoJSON);
+                        // Converting js object into JSON string
+                        // and writting to data.json file
+                        const dataJSON = JSON.stringify(forkinfoObject);
+                        // Ecriture du fichier
+                        fs.writeFileSync(PathUpdate + Module + ".json", dataJSON);
+                    }
+                } else {
+                    let rawdata = fs.readFileSync('./test/' + Module + "/config.json");
+                    let UpData = JSON.parse(rawdata);
+                    if (UpData.build !== updateData[Module].build) {
+                        var dataFork = {
+                                update: true,
+                                version: updateData[Module].version,
+                                build: updateData[Module].build
+                            }
+                            // Conversion
+                        const forkinfoJSON = JSON.stringify(dataFork);
+                        const forkinfoObject = JSON.parse(forkinfoJSON);
+                        // Converting js object into JSON string
+                        // and writting to data.json file
+                        const dataJSON = JSON.stringify(forkinfoObject);
+                        // Ecriture du fichier
+                        fs.writeFileSync(PathUpdate + Module + ".json", dataJSON);
+                    } else {
+                        var dataFork = {
+                                update: false,
+                                version: updateData[Module].version,
+                                build: updateData[Module].build
+                            }
+                            // Conversion
+                        const forkinfoJSON = JSON.stringify(dataFork);
+                        const forkinfoObject = JSON.parse(forkinfoJSON);
+                        // Converting js object into JSON string
+                        // and writting to data.json file
+                        const dataJSON = JSON.stringify(forkinfoObject);
+                        // Ecriture du fichier
+                        fs.writeFileSync(PathUpdate + Module + ".json", dataJSON);
                     }
                 }
             }
